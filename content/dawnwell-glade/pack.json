@@ -1,0 +1,1072 @@
+{
+  "manifest": {
+    "id": "dawnwell_glade_pack",
+    "name": "Dawnwell Glade — M1 sample",
+    "schemaVersion": 1,
+    "runtimeCompatibility": "aether_v1",
+    "releaseId": "dawnwell_m1_sample",
+    "status": "sample"
+  },
+  "rules": {
+    "movement": {
+      "input": "click_to_move",
+      "path": "straight_line",
+      "position": "ground_point",
+      "invalidDestination": "clamp_finite_reject_malformed",
+      "diagonalSpeed": "normalized",
+      "collision": "pass_through",
+      "renderDepth": "ground_y",
+      "groundMoveRetainsSelection": true
+    },
+    "combat": {
+      "input": "one_press_one_action",
+      "selectionAttacks": false,
+      "keyRepeat": "ignore",
+      "approach": "approach_then_strike_once",
+      "distance": "euclidean_ground_points",
+      "maxPendingActions": 1,
+      "pendingReplacement": "valid_request_replaces",
+      "cancelPendingOn": [
+        "ground_move",
+        "retarget",
+        "target_death",
+        "death",
+        "room_exit",
+        "disconnect"
+      ],
+      "spendAndCooldown": "at_execution",
+      "rejectedInput": "preserve_valid_pending",
+      "actionExecution": "stop_movement",
+      "mendCancelsPending": true,
+      "deathDisablesInput": true,
+      "textInputSuppressesShortcuts": true,
+      "panelClicksReachWorld": false
+    },
+    "recovery": {
+      "outOfCombatDelayMs": 6000,
+      "requireNoPursuingEnemy": true,
+      "healthPerSecond": 6,
+      "manaPerSecond": 6,
+      "respawnMs": 5000,
+      "respawnResources": "full",
+      "deathProgressLoss": "none",
+      "resetCooldownsOnRespawn": false
+    },
+    "room": {
+      "capacity": 8,
+      "reconnectGraceMs": 30000,
+      "identity": "one_character_per_browser_guest_token",
+      "retainedDisconnectedCounts": true,
+      "retainedDisconnectedVulnerable": true,
+      "disconnectStopsMovement": true,
+      "disconnectCancelsPending": true,
+      "replayCommandsOnReconnect": false,
+      "resetResourcesOnReconnect": false,
+      "resetCooldownsOnReconnect": false,
+      "lateReconnectSpawn": "map_player_spawn",
+      "expiry": "remove_presence_and_contributions_retain_recovery",
+      "full": "retryable_rejection"
+    },
+    "rewards": {
+      "eligibility": "damaging_contributors_remaining_in_room",
+      "distribution": "full_personal",
+      "retainThroughDeath": true,
+      "retainThroughRespawn": true,
+      "retainedDisconnectedEligible": true,
+      "clearOnReset": true,
+      "clearOnRemoval": true,
+      "resolution": "once_per_encounter_atomic"
+    },
+    "inventory": {
+      "slots": 12,
+      "equipmentSlots": [
+        "weapon"
+      ],
+      "equippedItemsRemainOwned": true,
+      "bonuses": "replace",
+      "changesRequire": "alive_out_of_combat",
+      "changesResetResourcesOrCooldowns": false
+    },
+    "chat": {
+      "scope": "room",
+      "format": "plain_text",
+      "disconnectedCanSend": false
+    },
+    "authority": "server_validated_intentions_and_timestamps"
+  },
+  "assets": [
+    {
+      "id": "dawnwell_background",
+      "name": "Dawnwell woodland scene",
+      "kind": "background",
+      "status": "placeholder",
+      "reason": "Original asset unavailable in M1; metadata only, no loadable file."
+    },
+    {
+      "id": "guardian_sheet",
+      "name": "Guardian body sheet",
+      "kind": "sprite_sheet",
+      "status": "placeholder",
+      "reason": "Original asset unavailable in M1; metadata only, no loadable file."
+    },
+    {
+      "id": "thornling_sheet",
+      "name": "Thornling sheet",
+      "kind": "sprite_sheet",
+      "status": "placeholder",
+      "reason": "Original asset unavailable in M1; metadata only, no loadable file."
+    },
+    {
+      "id": "mira_sheet",
+      "name": "Keeper Mira idle sheet",
+      "kind": "sprite_sheet",
+      "status": "placeholder",
+      "reason": "Original asset unavailable in M1; metadata only, no loadable file."
+    },
+    {
+      "id": "training_blade_sheet",
+      "name": "Training Blade overlay",
+      "kind": "sprite_sheet",
+      "status": "placeholder",
+      "reason": "Original asset unavailable in M1; metadata only, no loadable file."
+    },
+    {
+      "id": "dawnwell_blade_sheet",
+      "name": "Dawnwell Blade overlay",
+      "kind": "sprite_sheet",
+      "status": "placeholder",
+      "reason": "Original asset unavailable in M1; metadata only, no loadable file."
+    },
+    {
+      "id": "mira_portrait",
+      "name": "Keeper Mira portrait",
+      "kind": "portrait",
+      "status": "placeholder",
+      "reason": "Original asset unavailable in M1; metadata only, no loadable file."
+    },
+    {
+      "id": "basic_attack_icon",
+      "name": "Basic attack icon",
+      "kind": "icon",
+      "status": "placeholder",
+      "reason": "Original asset unavailable in M1; metadata only, no loadable file."
+    },
+    {
+      "id": "heavy_strike_icon",
+      "name": "Heavy Strike icon",
+      "kind": "icon",
+      "status": "placeholder",
+      "reason": "Original asset unavailable in M1; metadata only, no loadable file."
+    },
+    {
+      "id": "mend_icon",
+      "name": "Mend icon",
+      "kind": "icon",
+      "status": "placeholder",
+      "reason": "Original asset unavailable in M1; metadata only, no loadable file."
+    },
+    {
+      "id": "training_blade_icon",
+      "name": "Training Blade icon",
+      "kind": "icon",
+      "status": "placeholder",
+      "reason": "Original asset unavailable in M1; metadata only, no loadable file."
+    },
+    {
+      "id": "dawnwell_blade_icon",
+      "name": "Dawnwell Blade icon",
+      "kind": "icon",
+      "status": "placeholder",
+      "reason": "Original asset unavailable in M1; metadata only, no loadable file."
+    },
+    {
+      "id": "aether_shard_icon",
+      "name": "Aether Shard icon",
+      "kind": "icon",
+      "status": "placeholder",
+      "reason": "Original asset unavailable in M1; metadata only, no loadable file."
+    },
+    {
+      "id": "basic_attack_effect",
+      "name": "Basic hit effect",
+      "kind": "effect",
+      "status": "placeholder",
+      "reason": "Original asset unavailable in M1; metadata only, no loadable file."
+    },
+    {
+      "id": "heavy_strike_effect",
+      "name": "Heavy Strike effect",
+      "kind": "effect",
+      "status": "placeholder",
+      "reason": "Original asset unavailable in M1; metadata only, no loadable file."
+    },
+    {
+      "id": "mend_effect",
+      "name": "Mend effect",
+      "kind": "effect",
+      "status": "placeholder",
+      "reason": "Original asset unavailable in M1; metadata only, no loadable file."
+    },
+    {
+      "id": "destination_marker",
+      "name": "Movement destination marker",
+      "kind": "effect",
+      "status": "placeholder",
+      "reason": "Original asset unavailable in M1; metadata only, no loadable file."
+    },
+    {
+      "id": "selection_marker",
+      "name": "Selected target marker",
+      "kind": "effect",
+      "status": "placeholder",
+      "reason": "Original asset unavailable in M1; metadata only, no loadable file."
+    },
+    {
+      "id": "respawn_effect",
+      "name": "Respawn effect",
+      "kind": "effect",
+      "status": "placeholder",
+      "reason": "Original asset unavailable in M1; metadata only, no loadable file."
+    },
+    {
+      "id": "woodland_audio",
+      "name": "Woodland ambience",
+      "kind": "audio",
+      "status": "placeholder",
+      "reason": "Original asset unavailable in M1; metadata only, no loadable file."
+    },
+    {
+      "id": "basic_attack_audio",
+      "name": "Basic attack/hit sound",
+      "kind": "audio",
+      "status": "placeholder",
+      "reason": "Original asset unavailable in M1; metadata only, no loadable file."
+    },
+    {
+      "id": "heavy_strike_audio",
+      "name": "Heavy Strike sound",
+      "kind": "audio",
+      "status": "placeholder",
+      "reason": "Original asset unavailable in M1; metadata only, no loadable file."
+    },
+    {
+      "id": "mend_audio",
+      "name": "Mend sound",
+      "kind": "audio",
+      "status": "placeholder",
+      "reason": "Original asset unavailable in M1; metadata only, no loadable file."
+    },
+    {
+      "id": "enemy_defeat_audio",
+      "name": "Enemy defeat sound",
+      "kind": "audio",
+      "status": "placeholder",
+      "reason": "Original asset unavailable in M1; metadata only, no loadable file."
+    },
+    {
+      "id": "quest_complete_audio",
+      "name": "Quest complete sound",
+      "kind": "audio",
+      "status": "placeholder",
+      "reason": "Original asset unavailable in M1; metadata only, no loadable file."
+    },
+    {
+      "id": "interface_audio",
+      "name": "Interface feedback sound",
+      "kind": "audio",
+      "status": "placeholder",
+      "reason": "Original asset unavailable in M1; metadata only, no loadable file."
+    }
+  ],
+  "sprites": [
+    {
+      "id": "guardian_sprite",
+      "name": "Guardian placeholder metadata",
+      "assetId": "guardian_sheet",
+      "rigFamily": "guardian_v1",
+      "sheet": {
+        "widthPx": 128,
+        "heightPx": 128
+      },
+      "frames": [
+        {
+          "index": 0,
+          "x": 0,
+          "y": 0,
+          "width": 128,
+          "height": 128
+        }
+      ],
+      "groundAnchorPx": {
+        "x": 64,
+        "y": 112
+      },
+      "worldUnitsPerPixel": 1,
+      "facing": {
+        "source": "right",
+        "left": "mirror_x"
+      },
+      "clips": [
+        {
+          "name": "idle",
+          "frames": [
+            0
+          ],
+          "frameDurationMs": 100,
+          "loop": true
+        },
+        {
+          "name": "walk",
+          "frames": [
+            0
+          ],
+          "frameDurationMs": 100,
+          "loop": true
+        },
+        {
+          "name": "basic_attack",
+          "frames": [
+            0
+          ],
+          "frameDurationMs": 100,
+          "loop": false
+        },
+        {
+          "name": "heavy_strike",
+          "frames": [
+            0
+          ],
+          "frameDurationMs": 100,
+          "loop": false
+        },
+        {
+          "name": "mend",
+          "frames": [
+            0
+          ],
+          "frameDurationMs": 100,
+          "loop": false
+        },
+        {
+          "name": "death",
+          "frames": [
+            0
+          ],
+          "frameDurationMs": 100,
+          "loop": false
+        }
+      ],
+      "attachments": [
+        {
+          "name": "weapon_hand",
+          "frame": 0,
+          "positionPx": {
+            "x": 84,
+            "y": 64
+          }
+        }
+      ]
+    },
+    {
+      "id": "training_blade_sprite",
+      "name": "Training Blade placeholder overlay",
+      "assetId": "training_blade_sheet",
+      "rigFamily": "guardian_v1",
+      "sheet": {
+        "widthPx": 128,
+        "heightPx": 128
+      },
+      "frames": [
+        {
+          "index": 0,
+          "x": 0,
+          "y": 0,
+          "width": 128,
+          "height": 128
+        }
+      ],
+      "groundAnchorPx": {
+        "x": 64,
+        "y": 112
+      },
+      "worldUnitsPerPixel": 1,
+      "facing": {
+        "source": "right",
+        "left": "mirror_x"
+      },
+      "clips": [
+        {
+          "name": "idle",
+          "frames": [
+            0
+          ],
+          "frameDurationMs": 100,
+          "loop": true
+        },
+        {
+          "name": "walk",
+          "frames": [
+            0
+          ],
+          "frameDurationMs": 100,
+          "loop": true
+        },
+        {
+          "name": "basic_attack",
+          "frames": [
+            0
+          ],
+          "frameDurationMs": 100,
+          "loop": false
+        },
+        {
+          "name": "heavy_strike",
+          "frames": [
+            0
+          ],
+          "frameDurationMs": 100,
+          "loop": false
+        },
+        {
+          "name": "mend",
+          "frames": [
+            0
+          ],
+          "frameDurationMs": 100,
+          "loop": false
+        },
+        {
+          "name": "death",
+          "frames": [
+            0
+          ],
+          "frameDurationMs": 100,
+          "loop": false
+        }
+      ],
+      "attachments": [
+        {
+          "name": "weapon_hand",
+          "frame": 0,
+          "positionPx": {
+            "x": 84,
+            "y": 64
+          }
+        }
+      ]
+    },
+    {
+      "id": "dawnwell_blade_sprite",
+      "name": "Dawnwell Blade placeholder overlay",
+      "assetId": "dawnwell_blade_sheet",
+      "rigFamily": "guardian_v1",
+      "sheet": {
+        "widthPx": 128,
+        "heightPx": 128
+      },
+      "frames": [
+        {
+          "index": 0,
+          "x": 0,
+          "y": 0,
+          "width": 128,
+          "height": 128
+        }
+      ],
+      "groundAnchorPx": {
+        "x": 64,
+        "y": 112
+      },
+      "worldUnitsPerPixel": 1,
+      "facing": {
+        "source": "right",
+        "left": "mirror_x"
+      },
+      "clips": [
+        {
+          "name": "idle",
+          "frames": [
+            0
+          ],
+          "frameDurationMs": 100,
+          "loop": true
+        },
+        {
+          "name": "walk",
+          "frames": [
+            0
+          ],
+          "frameDurationMs": 100,
+          "loop": true
+        },
+        {
+          "name": "basic_attack",
+          "frames": [
+            0
+          ],
+          "frameDurationMs": 100,
+          "loop": false
+        },
+        {
+          "name": "heavy_strike",
+          "frames": [
+            0
+          ],
+          "frameDurationMs": 100,
+          "loop": false
+        },
+        {
+          "name": "mend",
+          "frames": [
+            0
+          ],
+          "frameDurationMs": 100,
+          "loop": false
+        },
+        {
+          "name": "death",
+          "frames": [
+            0
+          ],
+          "frameDurationMs": 100,
+          "loop": false
+        }
+      ],
+      "attachments": [
+        {
+          "name": "weapon_hand",
+          "frame": 0,
+          "positionPx": {
+            "x": 84,
+            "y": 64
+          }
+        }
+      ]
+    },
+    {
+      "id": "thornling_sprite",
+      "name": "Thornling placeholder metadata",
+      "assetId": "thornling_sheet",
+      "rigFamily": "thornling_v1",
+      "sheet": {
+        "widthPx": 64,
+        "heightPx": 64
+      },
+      "frames": [
+        {
+          "index": 0,
+          "x": 0,
+          "y": 0,
+          "width": 64,
+          "height": 64
+        }
+      ],
+      "groundAnchorPx": {
+        "x": 32,
+        "y": 56
+      },
+      "worldUnitsPerPixel": 1,
+      "facing": {
+        "source": "right",
+        "left": "mirror_x"
+      },
+      "clips": [
+        {
+          "name": "idle",
+          "frames": [
+            0
+          ],
+          "frameDurationMs": 100,
+          "loop": true
+        },
+        {
+          "name": "walk",
+          "frames": [
+            0
+          ],
+          "frameDurationMs": 100,
+          "loop": true
+        },
+        {
+          "name": "attack",
+          "frames": [
+            0
+          ],
+          "frameDurationMs": 100,
+          "loop": false
+        },
+        {
+          "name": "hit",
+          "frames": [
+            0
+          ],
+          "frameDurationMs": 100,
+          "loop": false
+        },
+        {
+          "name": "death",
+          "frames": [
+            0
+          ],
+          "frameDurationMs": 100,
+          "loop": false
+        }
+      ],
+      "attachments": []
+    },
+    {
+      "id": "mira_sprite",
+      "name": "Mira placeholder metadata",
+      "assetId": "mira_sheet",
+      "rigFamily": "mira_v1",
+      "sheet": {
+        "widthPx": 96,
+        "heightPx": 128
+      },
+      "frames": [
+        {
+          "index": 0,
+          "x": 0,
+          "y": 0,
+          "width": 96,
+          "height": 128
+        }
+      ],
+      "groundAnchorPx": {
+        "x": 48,
+        "y": 112
+      },
+      "worldUnitsPerPixel": 1,
+      "facing": {
+        "source": "right",
+        "left": "mirror_x"
+      },
+      "clips": [
+        {
+          "name": "idle",
+          "frames": [
+            0
+          ],
+          "frameDurationMs": 100,
+          "loop": true
+        }
+      ],
+      "attachments": []
+    }
+  ],
+  "appearances": [
+    {
+      "id": "guardian_default",
+      "name": "Default Guardian placeholder",
+      "rigFamily": "guardian_v1",
+      "layers": [
+        {
+          "slot": "body",
+          "spriteId": "guardian_sprite",
+          "order": 10
+        }
+      ],
+      "palette": []
+    },
+    {
+      "id": "mira_default",
+      "name": "Keeper Mira placeholder",
+      "rigFamily": "mira_v1",
+      "layers": [
+        {
+          "slot": "body",
+          "spriteId": "mira_sprite",
+          "order": 10
+        }
+      ],
+      "palette": []
+    }
+  ],
+  "characters": [
+    {
+      "id": "guardian_starter",
+      "name": "Starting Guardian",
+      "classId": "guardian",
+      "appearanceId": "guardian_default",
+      "initialMapId": "dawnwell_glade",
+      "startingLevel": 1,
+      "startingXp": 0,
+      "startingGold": 0,
+      "startingResources": "full",
+      "inventory": [
+        {
+          "itemId": "training_blade",
+          "count": 1
+        }
+      ],
+      "equipment": {
+        "weaponItemId": "training_blade"
+      }
+    }
+  ],
+  "maps": [
+    {
+      "id": "dawnwell_glade",
+      "name": "Dawnwell Glade",
+      "world": {
+        "width": 1280,
+        "height": 720,
+        "origin": "top_left"
+      },
+      "backgroundAssetId": "dawnwell_background",
+      "walkable": {
+        "minX": 64,
+        "maxX": 1216,
+        "minY": 440,
+        "maxY": 640
+      },
+      "safeArea": {
+        "kind": "x_at_or_below",
+        "boundaryX": 400,
+        "blockCombatBothWays": true
+      },
+      "playerSpawn": {
+        "x": 160,
+        "y": 540
+      },
+      "enemies": [
+        {
+          "id": "t1",
+          "enemyId": "thornling",
+          "position": {
+            "x": 560,
+            "y": 490
+          }
+        },
+        {
+          "id": "t2",
+          "enemyId": "thornling",
+          "position": {
+            "x": 750,
+            "y": 600
+          }
+        },
+        {
+          "id": "t3",
+          "enemyId": "thornling",
+          "position": {
+            "x": 960,
+            "y": 480
+          }
+        },
+        {
+          "id": "t4",
+          "enemyId": "thornling",
+          "position": {
+            "x": 1130,
+            "y": 600
+          }
+        }
+      ],
+      "npcs": [
+        {
+          "id": "mira_placement",
+          "npcId": "keeper_mira",
+          "position": {
+            "x": 260,
+            "y": 540
+          }
+        }
+      ]
+    }
+  ],
+  "classes": [
+    {
+      "id": "guardian",
+      "name": "Guardian",
+      "baseStats": {
+        "maxHealth": 120,
+        "maxMana": 60,
+        "attack": 10,
+        "defense": 2
+      },
+      "perLevel": {
+        "maxHealth": 20,
+        "attack": 2
+      },
+      "movementSpeed": 180,
+      "meleeRange": 64,
+      "skillIds": [
+        "basic_attack",
+        "heavy_strike",
+        "mend"
+      ],
+      "progression": {
+        "levels": [
+          {
+            "level": 1,
+            "cumulativeXp": 0
+          },
+          {
+            "level": 2,
+            "cumulativeXp": 100
+          },
+          {
+            "level": 3,
+            "cumulativeXp": 300
+          }
+        ],
+        "levelCap": 3,
+        "xpCap": 300,
+        "xpMode": "cumulative_clamped",
+        "refillResourcesOnLevelUp": false
+      }
+    }
+  ],
+  "skills": [
+    {
+      "id": "basic_attack",
+      "name": "Basic attack",
+      "target": "selected_enemy",
+      "range": 64,
+      "effect": {
+        "kind": "melee_damage",
+        "attackMultiplier": 1,
+        "minimumDamage": 1
+      },
+      "manaCost": 0,
+      "cooldownMs": 1200,
+      "recoveryMs": 300,
+      "iconAssetId": "basic_attack_icon",
+      "effectAssetId": "basic_attack_effect",
+      "soundAssetId": "basic_attack_audio"
+    },
+    {
+      "id": "heavy_strike",
+      "name": "Heavy Strike",
+      "target": "selected_enemy",
+      "range": 64,
+      "effect": {
+        "kind": "melee_damage",
+        "attackMultiplier": 2,
+        "minimumDamage": 1
+      },
+      "manaCost": 12,
+      "cooldownMs": 6000,
+      "recoveryMs": 300,
+      "iconAssetId": "heavy_strike_icon",
+      "effectAssetId": "heavy_strike_effect",
+      "soundAssetId": "heavy_strike_audio"
+    },
+    {
+      "id": "mend",
+      "name": "Mend",
+      "target": "self",
+      "effect": {
+        "kind": "self_heal",
+        "amount": 36,
+        "capAtMaxHealth": true
+      },
+      "manaCost": 18,
+      "cooldownMs": 10000,
+      "recoveryMs": 300,
+      "iconAssetId": "mend_icon",
+      "effectAssetId": "mend_effect",
+      "soundAssetId": "mend_audio"
+    }
+  ],
+  "items": [
+    {
+      "id": "training_blade",
+      "name": "Training Blade",
+      "kind": "weapon",
+      "stackable": false,
+      "slot": "weapon",
+      "attackBonus": 2,
+      "iconAssetId": "training_blade_icon",
+      "visualSpriteId": "training_blade_sprite"
+    },
+    {
+      "id": "dawnwell_blade",
+      "name": "Dawnwell Blade",
+      "kind": "weapon",
+      "stackable": false,
+      "slot": "weapon",
+      "attackBonus": 5,
+      "iconAssetId": "dawnwell_blade_icon",
+      "visualSpriteId": "dawnwell_blade_sprite"
+    },
+    {
+      "id": "aether_shard",
+      "name": "Aether Shard",
+      "kind": "quest_material",
+      "stackable": true,
+      "stacking": "one_slot_per_item_id",
+      "iconAssetId": "aether_shard_icon"
+    }
+  ],
+  "enemies": [
+    {
+      "id": "thornling",
+      "name": "Thornling",
+      "spriteId": "thornling_sprite",
+      "stats": {
+        "maxHealth": 150,
+        "attack": 10,
+        "defense": 2
+      },
+      "movementSpeed": 130,
+      "attack": {
+        "effect": {
+          "kind": "melee_damage",
+          "attackMultiplier": 1,
+          "minimumDamage": 1
+        },
+        "range": 64,
+        "intervalMs": 2000,
+        "firstAttackDelayMs": 2000
+      },
+      "behavior": {
+        "kind": "first_attacker_pursuit",
+        "idle": "at_spawn",
+        "engageOn": "damage",
+        "retarget": "nearest_living_contributor_in_spawn_leash",
+        "tieBreak": "character_id",
+        "leash": 240,
+        "respectSafeArea": true,
+        "respectWalkBounds": true,
+        "reset": "return_home_full_health_clear_contributions",
+        "freshEncounterOnReset": true,
+        "freshEncounterOnRespawn": true
+      },
+      "respawnMs": 10000,
+      "rewards": {
+        "xp": 25,
+        "gold": 5,
+        "items": []
+      },
+      "questDrops": [
+        {
+          "questId": "steady_the_dawnwell",
+          "itemId": "aether_shard",
+          "count": 1,
+          "condition": "active_quest_contributed_kill_after_acceptance"
+        }
+      ]
+    }
+  ],
+  "quests": [
+    {
+      "id": "steady_the_dawnwell",
+      "name": "Steady the Dawnwell",
+      "prerequisites": [],
+      "states": [
+        "available",
+        "active",
+        "completed"
+      ],
+      "objective": {
+        "kind": "contributed_enemy_item_collection",
+        "enemyId": "thornling",
+        "itemId": "aether_shard",
+        "count": 5
+      },
+      "turnIn": {
+        "npcId": "keeper_mira",
+        "range": 64,
+        "consume": [
+          {
+            "itemId": "aether_shard",
+            "count": 5
+          }
+        ],
+        "rewards": {
+          "xp": 50,
+          "gold": 25,
+          "items": [
+            {
+              "itemId": "dawnwell_blade",
+              "count": 1
+            }
+          ]
+        }
+      },
+      "completion": "once_per_character_atomic",
+      "surplusItems": "retain",
+      "sharedMapChanges": false
+    }
+  ],
+  "npcs": [
+    {
+      "id": "keeper_mira",
+      "name": "Keeper Mira",
+      "appearanceId": "mira_default",
+      "portraitAssetId": "mira_portrait",
+      "dialogueId": "mira_dawnwell_dialogue",
+      "interactionRange": 64,
+      "outOfRange": "approach_prompt",
+      "questIds": [
+        "steady_the_dawnwell"
+      ]
+    }
+  ],
+  "dialogues": [
+    {
+      "id": "mira_dawnwell_dialogue",
+      "name": "Keeper Mira — Dawnwell introduction",
+      "npcId": "keeper_mira",
+      "entryNodeId": "welcome",
+      "nodes": [
+        {
+          "id": "welcome",
+          "text": "The Dawnwell keeps this glade safe. Recover five Aether Shards from the corrupted Thornlings, and I will attune a blade for you.",
+          "choices": [
+            {
+              "id": "accept",
+              "text": "I will recover the shards.",
+              "condition": {
+                "kind": "quest_state",
+                "questId": "steady_the_dawnwell",
+                "state": "available"
+              },
+              "action": {
+                "kind": "accept_quest",
+                "questId": "steady_the_dawnwell"
+              },
+              "nextNodeId": null
+            },
+            {
+              "id": "turn_in",
+              "text": "I have brought the shards.",
+              "condition": {
+                "kind": "quest_state",
+                "questId": "steady_the_dawnwell",
+                "state": "active"
+              },
+              "action": {
+                "kind": "turn_in_quest",
+                "questId": "steady_the_dawnwell"
+              },
+              "nextNodeId": null
+            },
+            {
+              "id": "completed",
+              "text": "The Dawnwell Blade is serving me well.",
+              "condition": {
+                "kind": "quest_state",
+                "questId": "steady_the_dawnwell",
+                "state": "completed"
+              },
+              "action": null,
+              "nextNodeId": null
+            },
+            {
+              "id": "leave",
+              "text": "Farewell, Mira.",
+              "condition": {
+                "kind": "always"
+              },
+              "action": null,
+              "nextNodeId": null
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

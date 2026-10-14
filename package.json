@@ -1,0 +1,17 @@
+{
+  "name": "aether",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@11.18.0",
+  "engines": { "node": ">=24.12.0" },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "validate:content": "node tools/content/validate.ts",
+    "test": "node --test packages/content/test/*.test.ts packages/game-core/test/*.test.ts",
+    "check": "pnpm typecheck && pnpm validate:content && pnpm test"
+  },
+  "devDependencies": {
+    "@types/node": "24.19.2",
+    "typescript": "7.0.2"
+  }
+}
