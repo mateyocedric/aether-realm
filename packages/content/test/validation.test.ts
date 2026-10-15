@@ -33,9 +33,10 @@ test('missing definitions and multiple broken references are reported together',
   pack.classes[0]!.skillIds.push('missing_skill');
   pack.maps[0]!.enemies[0]!.enemyId = 'missing_enemy';
   pack.npcs[0]!.dialogueId = 'missing_dialogue';
+  pack.maps[0]!.presentation!.destinationMarkerAssetId = 'missing_marker';
   const result = validateContentPack(pack);
   assert.equal(result.success, false);
-  for (const id of ['missing_skill', 'missing_enemy', 'missing_dialogue']) assert.ok(result.diagnostics.some(d => d.code === 'missing_reference' && d.message.includes(id)));
+  for (const id of ['missing_skill', 'missing_enemy', 'missing_dialogue', 'missing_marker']) assert.ok(result.diagnostics.some(d => d.code === 'missing_reference' && d.message.includes(id)));
 });
 
 test('missing required IDs and duplicate global IDs fail without throwing', () => {

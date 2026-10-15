@@ -772,7 +772,11 @@
             "y": 540
           }
         }
-      ]
+      ],
+      "presentation": {
+        "destinationMarkerAssetId": "destination_marker",
+        "selectionMarkerAssetId": "selection_marker"
+      }
     }
   ],
   "classes": [

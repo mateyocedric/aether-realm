@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import type { GameCommand, GameSession, CharacterId, DeepReadonly, ObservedGameState, ConnectionState } from '../src/index.ts';
+import type { GameCommand, GameSession, CharacterId, DeepReadonly, ObservedGameState, ConnectionState, CommandEnvelope, CommandId } from '../src/index.ts';
 
 // Compile-time checks for the future adapter/UI boundary. Never executed.
 function typeBoundary(session: GameSession, state: DeepReadonly<ObservedGameState>, characterId: CharacterId) {
@@ -19,6 +19,10 @@ function typeBoundary(session: GameSession, state: DeepReadonly<ObservedGameStat
   return [wrongTarget, forgedDamage, premature];
 }
 void typeBoundary;
+
+// Branded primitives must retain their original primitive type under DeepReadonly.
+function readonlyCommandId(envelope: DeepReadonly<CommandEnvelope>): CommandId { return envelope.id; }
+void readonlyCommandId;
 
 test('game-core exports types without an adapter or runtime implementation', async () => {
   const exported = await import('../src/index.ts');

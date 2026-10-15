@@ -1,16 +1,28 @@
 # Aether
 
-Original AQW-inspired browser RPG. **M1 implements shared content and session contracts, sample definitions, and validation.** The Game Client, adapters, Creator Studio, and authoritative server are later milestones.
+Original AQW-inspired browser RPG. **M2 adds the local Next.js/Phaser client foundation** on top of M1's shared content/session contracts and validated sample definitions. Combat, quest execution, inventory interactions, Creator Studio, and authoritative multiplayer remain later milestones.
 
 The gameplay source of truth is [Dawnwell Glade](docs/game-design.md). Development order and architecture are in the [roadmap](docs/development-roadmap.md).
 
-## Development checks
-
-Use Node **24.12 or newer** and the pinned pnpm version from `package.json`. Node runs the TypeScript checks/tests through native type stripping; the separate compiler check verifies their types. [Node TypeScript documentation](https://nodejs.org/api/typescript.html).
+## Run the local client
 
 ```sh
 pnpm install --frozen-lockfile
+pnpm dev
+```
+
+Open http://127.0.0.1:3000 and choose **Enter the glade**. `/play` displays **Local Development** mode, labeled geometric asset placeholders, movement, selection, identity/resources, and session status. Local characters/notes reset when leaving or reloading; this milestone does not save gameplay progress.
+
+The Next.js application is in `apps/game-client`. Both the shared packages and app use pinned TypeScript 7. Next's installed documentation confirms its CLI checker supports that version. `next typegen` prepares generated route types before app type checking. Next-managed `next-env.d.ts` is ignored and regenerated rather than manually maintained.
+
+## Development checks
+
+Use Node **24.12 or newer** and the pinned pnpm version from `package.json`. Node runs unit tests through native type stripping; separate compiler checks verify shared and app types. [Node TypeScript documentation](https://nodejs.org/api/typescript.html).
+
+```sh
 pnpm check
+pnpm test:browser
+NEXT_PUBLIC_GAME_MODE=local-development pnpm build
 ```
 
 Individual checks:
@@ -20,6 +32,10 @@ pnpm typecheck
 pnpm validate:content
 pnpm test
 ```
+
+`pnpm test:browser` uses the installed Google Chrome channel. It starts a local Next.js server when needed and reuses an existing local server outside CI. A server started by the test runner is stopped afterward; an existing user server is left running. Set `E2E_BASE_URL` to another localhost URL when needed. Trace/failure images and the scene screenshot are generated under ignored `test-results/`.
+
+An ordinary `pnpm build` succeeds with the local preview disabled. An explicit preview build uses the environment flag above; run `pnpm start` to serve it. No production networking adapter exists. This guard prevents accidental activation of the local simulator in an ordinary production build.
 
 Validate another JSON pack or require completed assets:
 
@@ -38,8 +54,11 @@ The Dawnwell sample currently has **26 explicitly declared image/audio placehold
 | `packages/game-core` (`@aether/game-core`) | Type-only `GameSession`, commands, immutable observed state, events, lifecycle/readiness |
 | `content/dawnwell-glade/pack.json` | Hand-authored sample definitions, rules, and placeholder metadata |
 | `tools/content/validate.ts` | JSON validation CLI and ready-file existence/checksum checks |
+| `apps/game-client` | Local adapter, typed controller/bridge, browser-only Phaser host, responsive scene, React HUD, and content/asset routes |
+| `tests/browser`, `playwright.config.ts` | Browser input, resize, content loading, and navigation/lifecycle checks |
 | `docs/asset-conventions.md` | Coordinate, animation, facing, overlay, attachment, and placeholder conventions |
 | `docs/m1-implementation.md` | M1 acceptance evidence, changed-file inventory, and unresolved decisions |
+| `docs/m2-implementation.md` | M2 implementation, verification evidence, changed files, and limitations |
 
 The packages currently export ESM TypeScript source for workspace consumers; no publishing/build distribution is implemented. Future browser apps must compile workspace sources. Shared source has no React, Phaser, browser-storage, or SpacetimeDB imports.
 
@@ -55,7 +74,7 @@ Global IDs are unique across definition collections and the manifest. Placement 
 
 ## Session boundary
 
-`@aether/game-core` exports types only. `GameSession` describes connection/disconnection, readiness, commands, observed snapshots, events, credentials, unsubscribe functions, and an estimated authority clock. No adapter is implemented.
+`@aether/game-core` exports types only. `GameSession` describes connection/disconnection, readiness, commands, observed snapshots, events, credentials, unsubscribe functions, and an estimated authority clock. M2 implements the disposable local adapter inside the Game Client; a network adapter is still deferred.
 
 - Connection becomes `ready` only when content, room, and personal subscriptions are all applied. Reconnection clears readiness until refreshed snapshots arrive.
 - Commands express intentions and include a command ID. They do not carry an acting identity, damage, rewards, authoritative position, or client timestamp.
@@ -64,4 +83,4 @@ Global IDs are unique across definition collections and the manifest. Placement 
 - Command acceptance can mean a pending approach. Accepted presentation events carry deduplication IDs; adapters must not replay commands after reconnect.
 - `disconnect()` means connection loss and eventual grace-period handling. The `leave_room` intention requests room removal. Future adapters enforce that distinction.
 
-UI bridges and adapter behavior are M2/M3a work. These contracts do not claim multiplayer correctness, secure persistence, or implemented combat.
+The typed `GameController` bridge forwards read-only scene state and projects a stable HUD snapshot for React. Phaser receives frame-by-frame movement outside React state. The local adapter uses an injected clock/scheduler, validates content and destinations, and owns normalized movement; it rejects deferred commands without gameplay side effects. These checks do not claim multiplayer correctness, secure persistence, or implemented combat.

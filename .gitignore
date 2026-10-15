@@ -3,3 +3,8 @@ dist/
 coverage/
 *.tsbuildinfo
 .DS_Store
+.next/
+playwright-report/
+test-results/
+next-env.d.ts
+.pnpm-store/

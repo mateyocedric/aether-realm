@@ -132,6 +132,10 @@ export function validateContentPack(input: unknown, options: { requireReadyAsset
   pack.maps.forEach((map, i) => {
     const path = `maps[${i}]`, bounds = map.walkable;
     assetRef(map.backgroundAssetId, 'background', `${path}.backgroundAssetId`);
+    if (map.presentation) {
+      assetRef(map.presentation.destinationMarkerAssetId, 'effect', `${path}.presentation.destinationMarkerAssetId`);
+      assetRef(map.presentation.selectionMarkerAssetId, 'effect', `${path}.presentation.selectionMarkerAssetId`);
+    }
     if (bounds.minX < 0 || bounds.minY < 0 || bounds.maxX > map.world.width || bounds.maxY > map.world.height || bounds.minX >= bounds.maxX || bounds.minY >= bounds.maxY)
       error('invalid_value', `${path}.walkable`, 'Walk rectangle must have positive area inside the world');
     if (map.safeArea.boundaryX < bounds.minX || map.safeArea.boundaryX >= bounds.maxX)

@@ -13,7 +13,8 @@ export type EventId = RuntimeId<'event'>;
 /** Adapter-normalized authority epoch milliseconds; never supplied as command time. */
 export type AuthorityTimeMs = number;
 export type Unsubscribe = () => void;
-export type DeepReadonly<T> = T extends readonly (infer V)[] ? readonly DeepReadonly<V>[]
+export type DeepReadonly<T> = T extends string | number | boolean | bigint | symbol | null | undefined ? T
+  : T extends readonly (infer V)[] ? readonly DeepReadonly<V>[]
   : T extends object ? { readonly [K in keyof T]: DeepReadonly<T[K]> } : T;
 
 export interface EnemyHandle { instanceId: EnemyInstanceId; encounterId: EncounterId }

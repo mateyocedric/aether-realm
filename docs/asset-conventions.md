@@ -55,3 +55,9 @@ Ready entries include a pack-relative `assets/` file path, SHA-256 checksum, cre
 The CLI verifies ready-file existence/checksums and confines resolved paths to the pack. Browser validation checks manifest structure and cross-references. `--require-ready-assets` rejects placeholders; future publication also needs immutable release packaging, asset provenance review, runtime compatibility, and staged verification.
 
 Stable asset IDs do not depend on filenames. A new asset import cannot reuse an existing definition ID. No AQW art, characters, maps, interface artwork, or audio is supplied or required by this sample.
+
+## M2 renderer integration
+
+Maps can optionally declare `presentation.destinationMarkerAssetId` and `presentation.selectionMarkerAssetId`. Both resolve to effect assets and are checked by the shared validator. The Dawnwell pack now references its existing marker IDs explicitly; this is presentation metadata and changes no gameplay values.
+
+The scene resolves backgrounds, body/equipment sheets, frame rectangles, idle-frame references, anchors, scale, and facing from definitions. Ready visual assets load by stable ID through the app's verified asset route. Placeholders become labeled geometric stand-ins; changing a placeholder to a ready asset replaces its rendering without changing the scene's placements or movement code. Animation execution and sound remain M3 work.

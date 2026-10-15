@@ -57,6 +57,7 @@ export const mapSchema = z.strictObject({
   ...header,
   world: z.strictObject({ width: positive, height: positive, origin: z.literal('top_left') }),
   backgroundAssetId: id, walkable: rectangleSchema,
+  presentation: z.strictObject({ destinationMarkerAssetId: id, selectionMarkerAssetId: id }).optional(),
   safeArea: z.strictObject({ kind: z.literal('x_at_or_below'), boundaryX: number, blockCombatBothWays: z.literal(true) }),
   playerSpawn: pointSchema,
   enemies: z.array(z.strictObject({ id, enemyId: id, position: pointSchema })),
